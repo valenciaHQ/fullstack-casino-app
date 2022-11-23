@@ -43,7 +43,7 @@ export default function App() {
   const onSubmit = handleSubmit(async (data: FormValues) => {
     setLoading(true)
     try {
-      const user = { ...data, coins: Number(DEFAULT_START_COINS) }
+      const user = { ...data, coins: Number(DEFAULT_START_COINS) || 20 }
       const response = await api.post('/api/user/register', user)
       if (response.status === 209) {
         setNotification({ type: 'success', message: "Account successfully created" })
