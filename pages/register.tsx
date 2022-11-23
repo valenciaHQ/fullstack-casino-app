@@ -49,7 +49,7 @@ export default function App() {
         setNotification({ type: 'success', message: "Account successfully created" })
         dispatch(setAuth({ user }))
         setTimeout(() => {
-          router.push('/home')
+          router.push('/login')
         }, 500)
       }
     } catch (error) {
