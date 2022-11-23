@@ -9,7 +9,6 @@ import Loading from "./Loading";
 const Game = () => {
     const dispatch = useAppDispatch()
     const user = useSelector((state: { user: UserState }) => state.user.authUser)
-    console.log('user: ', user)
     const { reels, lastResult } = useSelector((state: { game: GameState }) => state.game)
     const [loading, setLoading] = useState(false)
     const spin = async () => {
@@ -24,7 +23,7 @@ const Game = () => {
             setLoading(false)
         }
     }
-    return loading ? <Loading /> : <div className="flex justify-center items-center">
+    return loading ? <Loading /> : <div className="flex justify-center items-center my-10">
         {reels.map((reel, ri) =>
             <div key={ri} className="flex x flex-col">
                 {reel.map((item, i) => {

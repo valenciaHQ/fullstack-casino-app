@@ -1,35 +1,10 @@
-import clientPromise from '../lib/mongodb'
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import api from '../utils/api';
 import Navbar from '../components/Navbar';
 import InputContainer from '../components/ InputContainer';
 import Loading from '../components/Loading';
-import CenteredContainer from '../components/CenteredContainer';
 import Game from '../components/Game';
-
-export async function getServerSideProps() {
-    try {
-        await clientPromise
-        // `await clientPromise` will use the default database passed in the MONGODB_URI
-        // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
-        //
-        // `const client = await clientPromise`
-        // `const db = client.db("myDatabase")`
-        //
-        // Then you can execute queries against your database like so:
-        // db.find({}) or any of the MongoDB Node Driver commands
-
-        return {
-            props: { isConnected: true },
-        }
-    } catch (e) {
-        console.error(e)
-        return {
-            props: { isConnected: false },
-        }
-    }
-}
 
 export default function Home() {
     const router = useRouter()
@@ -53,15 +28,16 @@ export default function Home() {
         setFormError(false)
         setLoading(true)
         const response = await api.get(`/api/countries?codes=${countryCodes}`)
-        setCountries((response.data).map((item: Country) => item.name.common))
+        console.log(response.data)
+        setCountries(response.data)
         setLoading(false)
     }
     return (
         <div>
             <Navbar />
             <main>
-                <section className='flex flex-col bg-slate-200 text-black h-screen justify-evenly'>
-                    <div className='w-1/4 self-center bg-white p-4 mt-8 rounded-lg'>
+                <section className='flex flex-col bg-slate-200 text-black justify-evenly md:h-screen'>
+                    <div className='md:w-1/4 w-3/4 self-center bg-white p-4 mt-8 rounded-lg'>
                         <InputContainer>
                             <label className="">Countries</label>
                             <input placeholder="List of codes separated by comma" type='text' onChange={e => setCountryCodes(e.target.value)} value={countryCodes} />

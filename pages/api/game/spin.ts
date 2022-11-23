@@ -27,12 +27,6 @@ const checkResult = (reels: Fruit[][]) => {
         const reel1Value = reels[1][i] as Fruit;
         const reel2Value = reels[2][i] as Fruit;
 
-        console.log(reel0Value)
-        console.log(reel1Value)
-        console.log(reel2Value)
-
-        console.log("----------------------------------------")
-        console.log(hit)
         if (reel0Value === reel1Value && reel1Value === reel2Value) {
             if (reel0Value === 'cherry') {
                 hit.push("three_cherries")

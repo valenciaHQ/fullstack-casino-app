@@ -26,10 +26,7 @@ async function Login(_req: NextApiRequest,
             return res.status(400).json({ status: 'error', error: 'User not found' });
         }
 
-        console.log("user: ", user)
-        console.log("body password: ", password)
         const pwdMatch = await bcrypt.compare(password, user.password);
-        console.log('match: ', pwdMatch)
         /* User matched */
         if (pwdMatch) {
             /* Create JWT Payload */
