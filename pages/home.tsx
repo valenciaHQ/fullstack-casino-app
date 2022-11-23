@@ -1,9 +1,12 @@
-import Head from 'next/head'
 import clientPromise from '../lib/mongodb'
-import { InferGetServerSidePropsType } from 'next'
-import { Box, Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Spinner, Tag } from '@chakra-ui/react';
-import { useState } from 'react';
-import axios from 'axios';
+import { MouseEventHandler, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import api from '../utils/api';
+import Navbar from '../components/Navbar';
+import InputContainer from '../components/ InputContainer';
+import Loading from '../components/Loading';
+import CenteredContainer from '../components/CenteredContainer';
+import Game from '../components/Game';
 
 export async function getServerSideProps() {
     try {
@@ -27,61 +30,55 @@ export async function getServerSideProps() {
         }
     }
 }
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
-export default function Home({
-    isConnected,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home() {
+    const router = useRouter()
     const [formError, setFormError] = useState(false)
-    const [countryCodes, setCountryCodes] = useState("")
+    const [countryCodes, setCountryCodes] = useState<string>("")
     const [countries, setCountries] = useState<Country[]>([])
     const [loading, setLoading] = useState<boolean>(false)
 
-    const handleFormSubmimt = async (e: React.FormEvent<HTMLInputElement>) => {
-        e.preventDefault()
+    useEffect(() => {
+        const token = localStorage.getItem("access_token");
+        if (!token) {
+            router.push("/login")
+        }
+    }, [router])
+
+    const handleFormSubmit = async () => {
         if (!countryCodes) {
             setFormError(true)
             return;
         }
         setFormError(false)
         setLoading(true)
-        const response = await axios.get(`/api/countries?codes=${countryCodes}`)
+        const response = await api.get(`/api/countries?codes=${countryCodes}`)
         setCountries((response.data).map((item: Country) => item.name.common))
         setLoading(false)
     }
     return (
-        <div className="container">
-            <Head>
-                <title>Create Next App</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
+        <div>
+            <Navbar />
             <main>
-                <h1 className="title">
-                    Challenge
-                </h1>
-                <Container>
-                    <FormControl as="form" onSubmit={handleFormSubmimt} isInvalid={formError}>
-                        <FormLabel>Country codes</FormLabel>
-                        <Input type='text' value={countryCodes} onChange={(e) => setCountryCodes(e.currentTarget.value)} />
-                        {formError && (
-                            <FormErrorMessage>
-                                Enter at least one code before submit.
-                            </FormErrorMessage>
-                        )}
-                        <FormHelperText>Separate codes with commas! Try with col,pe,at</FormHelperText>
-                        <Button type='submit' colorScheme='teal' size='md' mt={2}>
-                            Search countries
-                        </Button>
-                    </FormControl>
-                    <Box mt={4}>
-                        {loading ? <Spinner color='red.500' /> : countries.map(item => <Tag mr={4}>{item}</Tag>)}
-                    </Box>
-                </Container>
+                <section className='flex flex-col bg-slate-200 text-black h-screen justify-evenly'>
+                    <div className='w-1/4 self-center bg-white p-4 mt-8 rounded-lg'>
+                        <InputContainer>
+                            <label className="">Countries</label>
+                            <input placeholder="List of codes separated by comma" type='text' onChange={e => setCountryCodes(e.target.value)} value={countryCodes} />
+                            <span>Query by country codes: try with col,pe,at</span>
+                            {formError && <p>Set country codes</p>}
+                            <button type="button" onClick={handleFormSubmit}>Search</button>
+                        </InputContainer>
+                        <div>
+                            {loading ? <Loading /> : <div className='mt-4'>Results: {countries.map((item, i) => <span key={i} className='mr-2'>{item.name.common}</span>)}</div>}
+                        </div>
+                    </div>
+                    <Game />
+                </section>
             </main>
 
-            <footer>
-                <p>footer</p>
+            <footer className='flex justify-center py-4 bg-teal-500'>
+                <p>By <a className='text-white hover:opacity-80' href="www.valenciahq.com" target='_blank'>ValenciaHQ</a></p>
             </footer>
         </div>
     )

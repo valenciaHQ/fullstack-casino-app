@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input-container {
+    @apply flex;
+    @apply flex-col;
+  }
+
+  .input-container > label {
+    @apply my-2;
+  }
+
+  .input-container > input {
+    @apply bg-slate-200;
+    @apply p-2;
+  }
+
+  .input-container > button {
+    @apply mt-10;
+    @apply bg-green-400;
+    @apply p-2;
+    @apply text-white;
+    @apply rounded-lg;
+  }
+
+  .input-container > p {
+    @apply text-sm;
+    @apply text-red-400;
+    @apply py-2;
+  }
+}
