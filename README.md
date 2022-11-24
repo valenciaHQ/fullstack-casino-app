@@ -19,6 +19,8 @@ In this one you will find 3 pages
 - eslint / prettier -> eslint scans code looking for errors. Prettier scans code looking for formats improvements.
 - jsonwebtoken -> provide jwt solutions.
 - mongoDB -> nosql database based in documents.
+- vercel -> platform for deployment.
+- typescript -> superset of javascript that provides classes and typing.
 
 ## Environment variables
 
