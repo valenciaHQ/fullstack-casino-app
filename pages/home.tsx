@@ -28,7 +28,6 @@ export default function Home() {
         setFormError(false)
         setLoading(true)
         const response = await api.get(`/api/countries?codes=${countryCodes}`)
-        console.log(response.data)
         setCountries(response.data)
         setLoading(false)
     }
@@ -36,7 +35,7 @@ export default function Home() {
         <div>
             <Navbar />
             <main>
-                <section className='flex flex-col bg-slate-200 text-black justify-evenly md:h-screen'>
+                <section className='flex flex-col bg-slate-200 text-black justify-evenly md:h-screen opacity-80'>
                     <div className='md:w-1/4 w-3/4 self-center bg-white p-4 mt-8 rounded-lg'>
                         <InputContainer>
                             <label className="">Countries</label>

@@ -15,6 +15,7 @@ const Game = () => {
         setLoading(true)
         try {
             const response = await api.post("/api/game/spin", { reels, user });
+            console.log('response: ', response.data)
             dispatch(setGameResult({ reels: response.data.reels, hits: response.data.hits, createdAt: new Date().getTime() }))
             dispatch(setCoins(response.data.coins))
         } catch (error) {
@@ -34,7 +35,7 @@ const Game = () => {
         <div className="ml-4">
             <p>{`${user?.coins} coins remains`}</p>
             <p>{`Last game: ${lastResult}`}</p>
-            <button className="rounded-lg text-lg hover:opacity-80" onClick={spin}>Try your luck!</button>
+            <button className="rounded-lg text-lg hover:opacity-80 underline" onClick={spin}>Try your luck!</button>
         </div>
 
     </div>

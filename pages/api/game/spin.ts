@@ -78,7 +78,7 @@ export default async function handler(
             const newCoinsValue = userDB.coins ? userDB.coins - 1 : DEFAULT_START_COINS;
             const newvalues = { $set: { coins: newCoinsValue } };
             await db.collection("users").updateOne({ email: user.email }, newvalues)
-            return res.status(200).json({ hits, reels, newCoinsValue })
+            return res.status(200).json({ hits, reels, coins: newCoinsValue })
         } catch (error) {
             console.error(error)
         }

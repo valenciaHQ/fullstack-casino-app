@@ -61,7 +61,7 @@ export default function App() {
 
   return (
     <CenteredContainer>
-      <form onSubmit={onSubmit} className="flex flex-col w-1/4 p-8  border-2 border-solid border-black rounded-md bg-white" >
+      <form onSubmit={onSubmit} className="flex flex-col w-1/4 p-8  border-2 border-solid border-black rounded-md bg-gray-200" >
         <InputContainer>
           <label htmlFor="name">Name</label>
           <input {...register("name")} placeholder="Your name?" type="text" />
@@ -81,7 +81,7 @@ export default function App() {
           {loading ? <div className='mt-4'><Loading /></div> : <button type="submit"> Register </button>}
         </InputContainer>
       </form>
-      <p className='m-4'>Already registered?<a className='text-gray-600 hover:underline' href='#' onClick={() => router.push('/login')}> Go to login</a></p>
+      <p className='m-4 p-2 bg-slate-200 rounded-md'>Already registered?<a className='text-gray-600 hover:underline' href='#' onClick={() => router.push('/login')}> Go to login</a></p>
     </CenteredContainer>
   );
 }

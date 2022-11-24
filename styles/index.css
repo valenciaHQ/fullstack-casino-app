@@ -13,15 +13,16 @@
   }
 
   .input-container > input {
-    @apply bg-slate-200;
+    @apply bg-white;
     @apply p-2;
+    @apply rounded-sm;
   }
 
   .input-container > button {
     @apply mt-10;
     @apply bg-green-400;
     @apply p-2;
-    @apply text-white;
+    @apply text-black;
     @apply rounded-lg;
   }
 
@@ -29,5 +30,13 @@
     @apply text-sm;
     @apply text-red-400;
     @apply py-2;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-casino;
+    @apply bg-cover;
+    @apply bg-no-repeat;
   }
 }

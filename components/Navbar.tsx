@@ -24,7 +24,7 @@ const Navbar = () => {
         }, 500)
     }
 
-    return <nav className="flex justify-center p-8">
+    return <nav className="flex justify-center p-8 bg-white">
         <h2 className="">Welcome</h2>
         <p className="ml-2 px-2 bg-teal-200 rounded-lg">{user?.name || "User"}!</p>
         <div className="ml-auto hover:opacity-30 cursor-pointer" onClick={handleLogoff}>Log out</div>

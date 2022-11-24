@@ -47,7 +47,6 @@ export default function App() {
                 router.push('/home')
             }, 500)
         } catch (error) {
-            console.log(error)
             setNotification({ type: 'error', message: (error as ResponseError).response.data.error || "An error occurred" })
         } finally {
             setLoading(false)
@@ -56,7 +55,7 @@ export default function App() {
 
     return (
         <CenteredContainer>
-            <form onSubmit={onSubmit} className="flex flex-col w-1/4 p-8  border-2 border-solid border-black rounded-md bg-white" >
+            <form onSubmit={onSubmit} className="flex flex-col w-1/4 p-8  border-2 border-solid border-black rounded-md bg-gray-200" >
                 <InputContainer>
                     <label htmlFor="email" className="">Email</label>
                     <input {...register("email")} placeholder="Your email?" type='email' />
