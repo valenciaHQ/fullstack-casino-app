@@ -23,6 +23,7 @@ export const gameSlice = createSlice({
     reducers: {
         setGameResult: (state, action: PayloadAction<GameResult>) => {
             state.gameResults.push(action.payload)
+            state.reels = action.payload.reels;
             state.lastResult = action.payload.hits.map((hit: Gamehit) => rules[hit]).reduce((prev, curr) => prev + curr)
         },
     },

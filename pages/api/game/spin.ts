@@ -3,14 +3,24 @@ import clientPromise from "../../../lib/mongodb";
 const DEFAULT_START_COINS = process.env.START_COINS;
 
 //Mix values by reel. It change values positions randomly
-const shuffleArray = (array: string[]) => {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+function shuffle(array: string[]) {
+    let currentIndex = array.length, randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
     }
+
+    return array;
 }
+
 //Check what kind of double hit is
 const checkDoubleHit = (hit: Gamehit[], value: Fruit) => {
     if (value === 'cherry') {
@@ -77,7 +87,7 @@ export default async function handler(
 
         try {
             reels.forEach((reel: string[]) => {
-                shuffleArray(reel)
+                shuffle(reel)
             })
             const hits = checkResult(reels);
             //Substract 1 from existing user coins
