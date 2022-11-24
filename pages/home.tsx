@@ -53,7 +53,7 @@ export default function Home() {
             </main>
 
             <footer className='flex justify-center py-4 bg-teal-500'>
-                <p>By <a className='text-white hover:opacity-80' href="www.valenciahq.com" target='_blank'>ValenciaHQ</a></p>
+                <p>By <a className='text-white hover:opacity-80' href="https://valenciahq.com/" target="_blank" rel="noopener noreferrer">ValenciaHQ</a></p>
             </footer>
         </div>
     )
