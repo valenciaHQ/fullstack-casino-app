@@ -43,6 +43,7 @@ export default function App() {
   const onSubmit = handleSubmit(async (data: FormValues) => {
     setLoading(true)
     try {
+      //Create user with starter coins
       const user = { ...data, coins: Number(DEFAULT_START_COINS) || 20 }
       const response = await api.post('/api/user/register', user)
       if (response.status === 209) {

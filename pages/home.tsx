@@ -20,6 +20,7 @@ export default function Home() {
         }
     }, [router])
 
+    //Submit form values and set state
     const handleFormSubmit = async () => {
         if (!countryCodes) {
             setFormError(true)

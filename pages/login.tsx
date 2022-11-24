@@ -31,11 +31,13 @@ export default function App() {
     });
 
     useEffect(() => {
+        // If notification has any value, will trigger toast
         if (notification) {
             getToast(notification.type, notification.message)
         }
     }, [notification])
 
+    //Submit form values and set state
     const onSubmit = handleSubmit(async (data: FormValues) => {
         setLoading(true)
         try {

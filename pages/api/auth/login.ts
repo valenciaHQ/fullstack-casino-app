@@ -43,6 +43,7 @@ async function Login(_req: NextApiRequest,
                         expiresIn: 31556926, // 1 year in seconds
                     },
                 );
+                // Return user data and token
                 return res.status(200).json({
                     token: 'Bearer ' + token,
                     user

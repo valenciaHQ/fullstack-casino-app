@@ -3,6 +3,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../../lib/mongodb";
 import bcrypt from "bcrypt"
 
+// Register a new user into the database
+// Hash the password using bcrypt lib
 export default async (_req: NextApiRequest,
     res: NextApiResponse) => {
     try {

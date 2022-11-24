@@ -1,25 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { setCoins, UserState } from "../reducer/userSlice";
 import { GameState, setGameResult } from "../reducer/gameSlice";
 import { useAppDispatch } from "../store";
 import api from "../utils/api";
 import Loading from "./Loading";
+import { getToast } from "../utils";
 
 const Game = () => {
     const dispatch = useAppDispatch()
     const user = useSelector((state: { user: UserState }) => state.user.authUser)
     const { reels, lastResult } = useSelector((state: { game: GameState }) => state.game)
     const [loading, setLoading] = useState(false)
+    const [notification, setNotification] = useState<ToastType | null>(null)
+
+    useEffect(() => {
+        if (notification) {
+            getToast(notification.type, notification.message)
+        }
+    }, [notification])
+
+    //Spin action
     const spin = async () => {
         setLoading(true)
         try {
             const response = await api.post("/api/game/spin", { reels, user });
-            console.log('response: ', response.data)
             dispatch(setGameResult({ reels: response.data.reels, hits: response.data.hits, createdAt: new Date().getTime() }))
             dispatch(setCoins(response.data.coins))
         } catch (error) {
-
+            setNotification({ type: 'error', message: "An error ocurred doing spin" })
         } finally {
             setLoading(false)
         }
