@@ -37,3 +37,4 @@ There is room for improvements:
 
 - UI - Interface is not the best althought it has responsive design. Some animations on spin action, colors palette, etc
 - Token management (refresh)
+- Testing! i'd like to add some JEST / RTL testing.

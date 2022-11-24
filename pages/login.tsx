@@ -57,7 +57,7 @@ export default function App() {
 
     return (
         <CenteredContainer>
-            <form onSubmit={onSubmit} className="flex flex-col w-1/4 p-8  border-2 border-solid border-black rounded-md bg-gray-200" >
+            <form onSubmit={onSubmit} className="flex flex-col w-3/4 md:w-1/4 p-8 border-2 border-solid border-black rounded-md bg-gray-200" >
                 <InputContainer>
                     <label htmlFor="email" className="">Email</label>
                     <input {...register("email")} placeholder="Your email?" type='email' />
