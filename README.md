@@ -30,3 +30,10 @@ Create `.env` file with the following:
 - MONGO_DB_NAME='casino-app'
 - JWT_KEY='something-random'
 - START_COINS=20
+
+## Notes
+
+There is room for improvements:
+
+- UI - Interface is not the best althought it has responsive design. Some animations on spin action, colors palette, etc
+- Token management (refresh)
